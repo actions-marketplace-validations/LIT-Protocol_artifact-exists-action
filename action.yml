@@ -1,4 +1,4 @@
-name: "Check artifact existence"
+name: "Check artifact v4 existence"
 description: "Check existence of an artifact uploaded in the workflow by the upload-artifact action"
 author: "Yurii Serhiichuk"
 inputs:
