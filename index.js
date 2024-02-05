@@ -1,26 +1,19 @@
 const core = require("@actions/core");
-const artifact = require("@actions/artifact");
-const fs = require("fs");
+const { DefaultArtifactClient } = require("@actions/artifact");
 
 async function run() {
   try {
     const name = core.getInput("name", { required: true });
-    const tempArtifactPath = fs.mkdtempSync("artifactExists-") + `/${name}`;
-    const artifactClient = artifact.create();
-    // download a single artifact
+    const artifactClient = new DefaultArtifactClient();
+    // get a single artifact
     core.info(
-      `Starting download for ${name}. Temporary storing at ${tempArtifactPath} if exists.`
+      `Starting check for ${name}`
     );
-    const downloadOptions = {
-      createArtifactFolder: false,
-    };
     try {
-      const downloadResponse = await artifactClient.downloadArtifact(
+      const artifactResponse = await artifactClient.getArtifact(
         name,
-        tempArtifactPath,
-        downloadOptions
       );
-      core.info(`Artifact ${downloadResponse.artifactName} exists.`);
+      core.info(`Artifact ${artifactResponse.artifact.name} exists.`);
       core.setOutput("exists", true);
     } catch (err) {
       core.info(`Artifact ${name} does not exist or is not available.`);

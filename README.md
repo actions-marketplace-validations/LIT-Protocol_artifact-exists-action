@@ -2,9 +2,9 @@
 
 This action checks if an artifact exists and is available in the workflow.
 
-**Note**: The action is currently only compatible with `upload-artifact` action v1-v3 
-(the v4 version) has migrated to the newer API where the `artifact-id` is now required over 
-the artifact name.
+# Lit Fork Notes
+* Updated to work with artifact v4 api
+* Updated to use listArtifacts so we don't have to download a full artifact to check if it exists.
 
 ## Inputs
 
@@ -17,7 +17,7 @@ the artifact name.
 ## Example usage
 
 ```yaml
-uses: xSAVIKx/artifact-exists-action@v0
+uses: LIT-Protocol/artifact-exists-action@v0
 with:
   name: "coverage-artifact"
 ```
